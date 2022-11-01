@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  #container {
+    height: 500px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .secContainer {
+      position: absolute;
+      left: 0;
+      // width: 3000px;
+      height: 400px;
+      display: flex;
+      transition: 1.5s;
+      .childSlider {
+        .slider-img {
+          width: 100%;
+          height: 90%;
+          object-fit: cover;
+        }
+        .slider-title {
+          text-align: center;
+        }
+      }
+    }
+    .btnDiv {
+      position: absolute;
+      bottom: 0;
+      .leftBtn {
+        width: 200px;
+        height: 100px;
+      }
+      .rightBtn {
+        width: 200px;
+        height: 100px;
+      }
+    }
+  }
+}
