@@ -12,9 +12,10 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 40px;
 }
 #root #container {
-  height: 500px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -25,26 +26,94 @@
   left: 0;
   height: 400px;
   display: flex;
-  transition: 1.5s;
+}
+#root #container .secContainer .childSlider {
+  position: relative;
 }
 #root #container .secContainer .childSlider .slider-img {
   width: 100%;
-  height: 90%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 #root #container .secContainer .childSlider .slider-title {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  background-color: rgba(240, 248, 255, 0.247);
   text-align: center;
 }
-#root #container .btnDiv {
+#root .leftBtn {
+  height: 400px;
+  width: 50px;
+  background-color: rgba(29, 113, 238, 0.384);
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+  border-radius: 10px 0px 0px 10px;
+}
+#root .leftBtn:hover {
+  transition: 0.3s;
+  background-color: rgba(29, 113, 238, 0.842);
+}
+#root .rightBtn {
+  border: none;
+  height: 400px;
+  width: 50px;
+  background-color: rgba(29, 113, 238, 0.384);
+  transition: 0.3s;
+  cursor: pointer;
+  border-radius: 0px 10px 10px 0px;
+}
+#root .rightBtn:hover {
+  transition: 0.3s;
+  background-color: rgba(29, 113, 238, 0.842);
+}
+#root #fadeParent {
+  height: 400px;
+  display: flex;
+}
+#root #fadeParent .fadeChild {
+  width: 500px;
+  height: 100%;
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden;
+}
+#root #fadeParent .fadeChild .fadeImg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#root #fadeParent .fadeChild .fadeTitle {
   position: absolute;
   bottom: 0;
+  padding: 0px 0px 3px 10px;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.103);
+  text-shadow: 1px 1px 1px #fff;
 }
-#root #container .btnDiv .leftBtn {
-  width: 200px;
-  height: 100px;
+#root #fadeParent .leftBtn-fade {
+  width: 30px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  background: rgba(68, 65, 65, 0.514);
+  color: white;
+  border: none;
 }
-#root #container .btnDiv .rightBtn {
-  width: 200px;
-  height: 100px;
+#root #fadeParent .rightBtn-fade {
+  width: 30px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  right: 433px;
+  background: rgba(68, 65, 65, 0.521);
+  color: white;
+  border: none;
 }/*# sourceMappingURL=style.css.map */

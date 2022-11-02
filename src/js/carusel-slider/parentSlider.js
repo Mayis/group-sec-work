@@ -9,27 +9,23 @@ export default function parentSlider(
   counter = 1,
   autoModeSelector = true
 ) {
+  const fullWidth = data.length * width;
   const container = document.createElement("div");
   const childContainer = document.createElement("div");
-  const btnDiv = document.createElement("div");
-  btnDiv.className = "btnDiv";
   const leftBtn = document.createElement("button");
   const rightBtn = document.createElement("button");
   leftBtn.textContent = "<";
   rightBtn.textContent = ">";
   leftBtn.className = "leftBtn";
   rightBtn.className = "rightBtn";
-  btnDiv.append(leftBtn, rightBtn);
   childContainer.className = "secContainer";
-  container.append(childContainer, btnDiv);
+  container.append(childContainer);
   container.id = "container";
-  root.appendChild(container);
+  root.append(leftBtn, container, rightBtn);
+  container.style.width = `${width * counter}px`;
+  childContainer.style.width = `${fullWidth}px`;
 
-  container.style.width = width * counter;
-  const fullWidth = data.length * width;
-  childContainer.style.width = fullWidth;
-
-  data.forEach((slider, i) => childSlider(childContainer, slider, width));
+  data.forEach((slider) => childSlider(childContainer, slider, width));
   //   -----------------Events
   leftBtn.addEventListener("click", () =>
     goLeft(childContainer, width, fullWidth, counter)

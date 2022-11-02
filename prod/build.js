@@ -20,13 +20,53 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/js/childSlider.js":
-/*!*******************************!*\
-  !*** ./src/js/childSlider.js ***!
-  \*******************************/
+/***/ "./src/js/carusel-slider/childSlider.js":
+/*!**********************************************!*\
+  !*** ./src/js/carusel-slider/childSlider.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ childSlider)\n/* harmony export */ });\nfunction childSlider(parent, data, width) {\r\n  const child = document.createElement(\"div\");\r\n  child.className = \"childSlider\";\r\n  child.style.cssText = `\r\n    width:${width + \"px\"}\r\n  `;\r\n  child.innerHTML = `\r\n        <img src=\"${data.src}\" class=\"slider-img\"/>\r\n        <h1 class=\"slider-title\">${data.title}</h1>\r\n    `;\r\n  parent.appendChild(child);\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/childSlider.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ childSlider)\n/* harmony export */ });\nfunction childSlider(parent, data, width) {\r\n  const child = document.createElement(\"div\");\r\n  child.className = \"childSlider\";\r\n  child.style.cssText = `\r\n    width:${width + \"px\"}\r\n  `;\r\n  child.innerHTML = `\r\n        <img src=\"${data.src}\" class=\"slider-img\"/>\r\n        <h1 class=\"slider-title\">${data.title}</h1>\r\n    `;\r\n  parent.appendChild(child);\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/carusel-slider/childSlider.js?");
+
+/***/ }),
+
+/***/ "./src/js/carusel-slider/helper/carusel.js":
+/*!*************************************************!*\
+  !*** ./src/js/carusel-slider/helper/carusel.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"autoMode\": () => (/* binding */ autoMode),\n/* harmony export */   \"goLeft\": () => (/* binding */ goLeft),\n/* harmony export */   \"goRight\": () => (/* binding */ goRight)\n/* harmony export */ });\nlet offSet = 0;\r\nfunction goRight(element, width, fullWidth, counter) {\r\n  offSet += width * counter;\r\n  if (offSet > fullWidth - width) offSet = 0;\r\n  element.style.left = -offSet + \"px\";\r\n}\r\nfunction goLeft(element, width, fullWidth, counter) {\r\n  offSet -= width * counter;\r\n  if (offSet < 0) offSet = fullWidth - width;\r\n\r\n  element.style.left = -offSet + \"px\";\r\n}\r\n// --------------------------------------------------\r\nlet id;\r\nfunction autoMode(element, width, fullWidth, counter) {\r\n  if (id) {\r\n    clearInterval(id);\r\n  }\r\n  id = setInterval(() => {\r\n    goRight(element, width, fullWidth, counter);\r\n    autoMode(element, width, fullWidth, counter);\r\n  }, 5000);\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/carusel-slider/helper/carusel.js?");
+
+/***/ }),
+
+/***/ "./src/js/carusel-slider/parentSlider.js":
+/*!***********************************************!*\
+  !*** ./src/js/carusel-slider/parentSlider.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ parentSlider)\n/* harmony export */ });\n/* harmony import */ var _helper_carusel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper/carusel */ \"./src/js/carusel-slider/helper/carusel.js\");\n/* harmony import */ var _childSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./childSlider */ \"./src/js/carusel-slider/childSlider.js\");\n\r\n\r\n\r\n\r\nfunction parentSlider(\r\n  root,\r\n  data,\r\n  width,\r\n  counter = 1,\r\n  autoModeSelector = true\r\n) {\r\n  const fullWidth = data.length * width;\r\n  const container = document.createElement(\"div\");\r\n  const childContainer = document.createElement(\"div\");\r\n  const leftBtn = document.createElement(\"button\");\r\n  const rightBtn = document.createElement(\"button\");\r\n  leftBtn.textContent = \"<\";\r\n  rightBtn.textContent = \">\";\r\n  leftBtn.className = \"leftBtn\";\r\n  rightBtn.className = \"rightBtn\";\r\n  childContainer.className = \"secContainer\";\r\n  container.append(childContainer);\r\n  container.id = \"container\";\r\n  root.append(leftBtn, container, rightBtn);\r\n  container.style.width = `${width * counter}px`;\r\n  childContainer.style.width = `${fullWidth}px`;\r\n\r\n  data.forEach((slider) => (0,_childSlider__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(childContainer, slider, width));\r\n  //   -----------------Events\r\n  leftBtn.addEventListener(\"click\", () =>\r\n    (0,_helper_carusel__WEBPACK_IMPORTED_MODULE_0__.goLeft)(childContainer, width, fullWidth, counter)\r\n  );\r\n  rightBtn.addEventListener(\"click\", () =>\r\n    (0,_helper_carusel__WEBPACK_IMPORTED_MODULE_0__.goRight)(childContainer, width, fullWidth, counter)\r\n  );\r\n  // -----------------autoMode\r\n  if (autoModeSelector) (0,_helper_carusel__WEBPACK_IMPORTED_MODULE_0__.autoMode)(childContainer, width, fullWidth, counter);\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/carusel-slider/parentSlider.js?");
+
+/***/ }),
+
+/***/ "./src/js/fadeIn-fadeOut slider/fadeInOutChild.js":
+/*!********************************************************!*\
+  !*** ./src/js/fadeIn-fadeOut slider/fadeInOutChild.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ fadeOutChild)\n/* harmony export */ });\nfunction fadeOutChild(parent, slider) {\r\n  parent.innerHTML = `\r\n    \r\n        <img src=${slider.src} class=\"fadeImg\"/>\r\n        <h1 class=\"fadeTitle\"> ${slider.title}</h1>\r\n        \r\n    `;\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/fadeIn-fadeOut_slider/fadeInOutChild.js?");
+
+/***/ }),
+
+/***/ "./src/js/fadeIn-fadeOut slider/fadeInOutParent.js":
+/*!*********************************************************!*\
+  !*** ./src/js/fadeIn-fadeOut slider/fadeInOutParent.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ fadeInOutParent)\n/* harmony export */ });\n/* harmony import */ var _fadeInOutChild__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fadeInOutChild */ \"./src/js/fadeIn-fadeOut slider/fadeInOutChild.js\");\n\r\n\r\nfunction fadeInOutParent(root, data) {\r\n  const parent = document.createElement(\"div\");\r\n  const child = document.createElement(\"div\");\r\n  const leftBtn = document.createElement(\"button\");\r\n  const rightBtn = document.createElement(\"button\");\r\n  leftBtn.textContent = \"<\";\r\n  rightBtn.textContent = \">\";\r\n  parent.id = \"fadeParent\";\r\n  child.className = \"fadeChild\";\r\n  leftBtn.className = \"leftBtn-fade\";\r\n  rightBtn.className = \"rightBtn-fade\";\r\n  parent.append(leftBtn, child, rightBtn);\r\n  root.append(parent);\r\n\r\n  (0,_fadeInOutChild__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(child, data[0]);\r\n  leftBtn.addEventListener(\"click\", () => fadeOut(child, data));\r\n  rightBtn.addEventListener(\"click\", () => fadeIn(child, data));\r\n}\r\nlet num = 0;\r\nfunction fadeIn(child, data) {\r\n  num += 1;\r\n  if (data.length - 1 >= num) {\r\n    (0,_fadeInOutChild__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(child, data[num]);\r\n\r\n    console.log(\"data length\", data.length - 1);\r\n    console.log(\"current show\", num);\r\n  } else {\r\n    (0,_fadeInOutChild__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(child, data[0]);\r\n\r\n    num = 0;\r\n  }\r\n}\r\nfunction fadeOut(child, data) {\r\n  num -= 1;\r\n  if (num >= 0) {\r\n    (0,_fadeInOutChild__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(child, data[num]);\r\n    console.log(\"data length\", data.length - 1);\r\n    console.log(\"current show\", num);\r\n  } else {\r\n    (0,_fadeInOutChild__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(child, data[data.length - 1]);\r\n    num = data.length - 1;\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/fadeIn-fadeOut_slider/fadeInOutParent.js?");
 
 /***/ }),
 
@@ -36,17 +76,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _data_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../data/data */ \"./src/data/data.js\");\n/* harmony import */ var _parentSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parentSlider */ \"./src/js/parentSlider.js\");\n\r\n\r\n\r\n// ---------------------------------------\r\nconst root = document.querySelector(\"#root\");\r\n// ---------------------\r\nconst width = 300;\r\nconst autoMode = false;\r\nlet counter = 4;\r\n\r\n// RESIZE METHOD--------------\r\nwindow.onresize = displayWindowSize;\r\nwindow.onload = displayWindowSize;\r\nfunction displayWindowSize() {\r\n  const winWidth = window.innerWidth;\r\n  if (winWidth < 1100) counter = 3;\r\n  if (winWidth < 910) counter = 2;\r\n  if (winWidth < 610) counter = 1;\r\n\r\n  root.innerHTML = \"\";\r\n  (0,_parentSlider__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(root, _data_data__WEBPACK_IMPORTED_MODULE_0__[\"default\"], width, counter, autoMode);\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/index.js?");
-
-/***/ }),
-
-/***/ "./src/js/parentSlider.js":
-/*!********************************!*\
-  !*** ./src/js/parentSlider.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ parentSlider)\n/* harmony export */ });\n/* harmony import */ var _childSlider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./childSlider */ \"./src/js/childSlider.js\");\n\r\n\r\nfunction parentSlider(\r\n  root,\r\n  data,\r\n  width,\r\n  counter = 1,\r\n  autoModeSelector = true\r\n) {\r\n  const container = document.createElement(\"div\");\r\n  const container2 = document.createElement(\"div\");\r\n  const btnDiv = document.createElement(\"div\");\r\n  btnDiv.className = \"btnDiv\";\r\n  const leftBtn = document.createElement(\"button\");\r\n  const rightBtn = document.createElement(\"button\");\r\n  leftBtn.textContent = \"<\";\r\n  rightBtn.textContent = \">\";\r\n  leftBtn.className = \"leftBtn\";\r\n  rightBtn.className = \"rightBtn\";\r\n  btnDiv.append(leftBtn, rightBtn);\r\n  container2.className = \"secContainer\";\r\n  container.append(container2, btnDiv);\r\n  container.id = \"container\";\r\n  root.appendChild(container);\r\n\r\n  container.style.cssText = `width:${width * counter}px`;\r\n  const fullWidth = data.length * width;\r\n  container2.style.width = fullWidth;\r\n  //   ---------------------\r\n\r\n  data.forEach((slider, i) => (0,_childSlider__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(container2, slider, width));\r\n  //   -----------------\r\n  leftBtn.addEventListener(\"click\", () =>\r\n    goLeft(container2, width, fullWidth, counter)\r\n  );\r\n  rightBtn.addEventListener(\"click\", () =>\r\n    goRight(container2, width, fullWidth, counter)\r\n  );\r\n  if (autoModeSelector) autoMode(container2, width, fullWidth, counter);\r\n}\r\n// -------------------------------------------------\r\n// with left-right\r\nlet offSet = 0;\r\nfunction goRight(element, width, fullWidth, counter) {\r\n  offSet += width * counter;\r\n  if (offSet > fullWidth - width) offSet = 0;\r\n  element.style.left = -offSet + \"px\";\r\n}\r\nfunction goLeft(element, width, fullWidth, counter) {\r\n  offSet -= width * counter;\r\n  if (offSet < 0) offSet = fullWidth - width;\r\n\r\n  element.style.left = -offSet + \"px\";\r\n}\r\n// --------------------------------------------------\r\nlet id;\r\nfunction autoMode(element, width, fullWidth, counter) {\r\n  if (id) {\r\n    clearInterval(id);\r\n  }\r\n  id = setInterval(() => {\r\n    goRight(element, width, fullWidth, counter);\r\n    autoMode(element, width, fullWidth, counter);\r\n  }, 5000);\r\n}\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/parentSlider.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _data_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../data/data */ \"./src/data/data.js\");\n/* harmony import */ var _fadeIn_fadeOut_slider_fadeInOutParent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fadeIn-fadeOut slider/fadeInOutParent */ \"./src/js/fadeIn-fadeOut slider/fadeInOutParent.js\");\n/* harmony import */ var _carusel_slider_parentSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./carusel-slider/parentSlider */ \"./src/js/carusel-slider/parentSlider.js\");\n\r\n\r\n\r\n\r\n// ---------------------------------------root HTML\r\n// const root = document.querySelector(\"#root\");\r\n// // ---------------------select parameter\r\n// const width = 300;\r\n// const autoMode = false;\r\n// let counter = 3;\r\n\r\n// // --------------resize method\r\n// window.onresize = displayWindowSize;\r\n// window.onload = displayWindowSize;\r\n// function displayWindowSize() {\r\n//   const winWidth = window.innerWidth;\r\n//   if (winWidth < 1100) counter = 3;\r\n//   if (winWidth < 910) counter = 2;\r\n//   if (winWidth < 610) counter = 1;\r\n\r\n//   root.innerHTML = \"\";\r\n//   parentSlider(root, data, width, counter, autoMode);\r\n// }\r\n(0,_fadeIn_fadeOut_slider_fadeInOutParent__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(root, _data_data__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\r\n\n\n//# sourceURL=webpack://group-work-2/./src/js/index.js?");
 
 /***/ })
 
